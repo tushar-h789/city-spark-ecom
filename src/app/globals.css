@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Brand Colors - Using Golden Ratio (1.618) for mathematical harmony */
+    --primary: 216 76% 28%;
+    --primary-hover: 216 76% 23%;
+    --primary-active: 216 76% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary using complementary-adjacent harmony (35° from primary) */
+    --secondary: 35 85% 55%;
+    --secondary-hover: 35 85% 50%;
+    --secondary-active: 35 85% 45%;
+    --secondary-foreground: 35 90% 15%; /* Updated to a darker color for better contrast */
+
+    /* Rest of the tokens remain the same */
+    --success: 142 72% 29%;
+    --success-foreground: 0 0% 100%;
+    --info: 216 76% 40%;
+    --info-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Neutral Scale - Using 8-point spacing for consistent increments */
+    --background: 0 0% 100%;
+    --foreground: 216 45% 23%;
+
+    /* Surface Colors using Primary hue */
+    --card: 216 20% 99%;
+    --card-foreground: 216 45% 23%;
+    --popover: 216 20% 99%;
+    --popover-foreground: 216 45% 23%;
+
+    /* Supporting Colors - Using 60-30-10 rule */
+    --muted: 216 20% 95%;
+    --muted-foreground: 216 20% 45%;
+    --accent: 35 85% 96%;
+    --accent-foreground: 35 85% 45%;
+
+    /* Interactive Elements */
+    --border: 216 20% 90%;
+    --input: 216 20% 90%;
+    --ring: 216 76% 28%;
+
+    /* Dark Mode Colors - Maintain relative relationships */
+    --dark-background: 216 45% 8%;
+    --dark-foreground: 216 20% 95%;
+    --dark-card: 216 45% 11%;
+    --dark-popover: 216 45% 11%;
+    --dark-muted: 216 20% 20%;
+    --dark-accent: 35 85% 20%;
+
+    /* System */
+    --radius: 0.5rem;
+  }
+
+  [data-radix-popover-trigger] {
+    --radix-popover-trigger-width: 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Content Visibility Classes */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+
+  .cv-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 200px;
+  }
+
+  .cv-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
+  }
+
+  .cv-list {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
+  }
+
+  .cv-gallery {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
+  }
+
+  .cv-comments {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 1000px;
+  }
+
+  .cv-sidebar {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 100vh;
+  }
+
+  .cv-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
+  }
+
+  .contain-layout {
+    contain: layout;
+  }
+
+  .contain-paint {
+    contain: paint;
+  }
+
+  .contain-strict {
+    contain: strict;
+  }
+}
+
+/* Animations */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing-placeholder::placeholder {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(30, end), blink-caret 0.5s step-end infinite;
+  will-change: width;
+}
+
+.popover-content-width-same-as-its-trigger {
+  width: var(--radix-popover-trigger-width);
+  max-height: var(--radix-popover-content-available-height);
+}
+
+/* Remove spinner arrows */
+.spinner-none,
+.spinner-none::-webkit-inner-spin-button,
+.spinner-none::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: textfield;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) translateX(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(50%);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Toast animations */
+@keyframes progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes circle-draw {
+  0% {
+    stroke-dasharray: 63;
+    stroke-dashoffset: -63;
+  }
+  100% {
+    stroke-dasharray: 63;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes check-draw {
+  0% {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+  }
+  100% {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .typing-placeholder,
+  .animate-fadeIn {
+    animation: none;
+  }
+}
